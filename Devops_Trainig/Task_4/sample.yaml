@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: springboot-app
+  name: springboot-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: springboot-app
+  template:
+    metadata:
+      labels:
+        app: springboot-app
+    spec:
+      containers:
+      - name: my-springboot-app
+        image: vijith22csr239/pet
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+# service type loadbalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: springboot-app
+    k8s-app: springboot-app
+  name: springboot-app
+spec:
+  ports:
+  - name: http
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  type: NodePort
+  selector:
+    app: springboot-app

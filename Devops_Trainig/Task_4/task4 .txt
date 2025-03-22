@@ -1,0 +1,8 @@
+   1 mkdir task4
+   2  cd task4
+   3  vim sample.yaml
+   4  kubectl apply -f sample.yaml
+   5  kubectl get pods
+   6  minikube service springboot-app
+   
+
